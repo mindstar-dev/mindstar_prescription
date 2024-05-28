@@ -26,5 +26,9 @@ const config = {
     ],
   },
 };
+const withPWA = require("@ducanh2912/next-pwa").default({
+  dest: "public",
+});
 
-export default config;
+module.exports = withPWA(config);
+// export default config;
