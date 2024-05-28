@@ -7,9 +7,11 @@ import CompounderDashBoard from "./compounder-dashboard";
 import DoctorDashBoard from "./doctor-dashboard";
 import { Session } from "node_modules/next-auth/core/types";
 import { GetServerSideProps } from "next/types";
+import useInstallPrompt from "~/hooks/useInstallPrompt";
 
 export default function Home() {
   const ses = useSession();
+  const { deferredPrompt, showInstallPrompt } = useInstallPrompt();
   if (ses.status === "loading") {
     return <div></div>;
   } else if (
@@ -19,6 +21,9 @@ export default function Home() {
     return (
       <>
         <main className="flex h-full w-full">
+          {deferredPrompt && (
+            <button onClick={showInstallPrompt}>Install PWA</button>
+          )}
           <DoctorDashBoard />
         </main>
       </>
@@ -30,6 +35,9 @@ export default function Home() {
     return (
       <>
         <main className="flex h-full w-full">
+          {deferredPrompt && (
+            <button onClick={showInstallPrompt}>Install PWA</button>
+          )}
           <CompounderDashBoard />
         </main>
       </>
@@ -38,6 +46,9 @@ export default function Home() {
     return (
       <>
         <main className="flex h-full w-full">
+          {deferredPrompt && (
+            <button onClick={showInstallPrompt}>Install PWA</button>
+          )}
           <DoctorLogin />
         </main>
       </>
